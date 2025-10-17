@@ -8,7 +8,13 @@ import contactRoutes from './routes/contact.js';
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://poojaportfolio-frontendd.onrender.com'  // ✅ AUR YEH BHI
+  ],
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
