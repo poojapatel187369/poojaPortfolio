@@ -9,7 +9,14 @@ const app = express();
 
 // Middleware
 app.use(cors({
+<<<<<<< HEAD
   origin: process.env.CLIENT_URL || 'http://localhost:3000',
+=======
+  origin: [
+    'http://localhost:3000',
+    'https://poojaportfolio-frontendd.onrender.com'  // ✅ AUR YEH BHI
+  ],
+>>>>>>> 50fd7bff54b386609f0fd0e9702fb1dac961406c
   credentials: true
 }));
 app.use(express.json());
@@ -60,8 +67,14 @@ app.listen(PORT, () => {
   console.log('🚀 Server started successfully!');
   console.log('='.repeat(50));
   console.log(`📍 Port: ${PORT}`);
+<<<<<<< HEAD
   console.log(`📧 Email: ${process.env.EMAIL_USER}`);
   console.log(`🌐 Frontend: ${process.env.CLIENT_URL}`);
   console.log(`🗄️ MongoDB: ${process.env.MONGODB_URI ? 'Configured' : 'Not configured'}`);
   console.log('='.repeat(50));
 });
+=======
+  console.log('📧 Nodemailer configured!');
+  console.log('🗄️ MongoDB connecting...');
+});
+>>>>>>> 50fd7bff54b386609f0fd0e9702fb1dac961406c

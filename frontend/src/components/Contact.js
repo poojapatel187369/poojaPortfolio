@@ -28,7 +28,7 @@ const Contact = () => {
       console.log('🔄 Sending message...', formData);
       
       const response = await axios.post(
-        'http://localhost:5000/api/contact', 
+        'https://poojaportfolio-backend.onrender.com/api/contact', 
         formData,
         {
           headers: {
