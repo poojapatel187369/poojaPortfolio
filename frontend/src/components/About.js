@@ -1,206 +1,187 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { portfolioData } from '../data/portfolioData';
 
 const About = () => {
-  const { personalInfo } = portfolioData;
+  const { personalInfo, education } = portfolioData;
+  const currentCGPA = education[0]?.cgpa || "8.7";
+  const [isImageZoomed, setIsImageZoomed] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
+
+  const images = [
+    "/about/college-photoo.jpg",
+    "/about/college-activity.jpg",
+    "/about/s1.jpg",
+    "/about/s2.jpg",
+    
+  ];
+
+  // Auto slide images every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 3000);
+    
+    return () => clearInterval(interval);
+  }, [images.length]);
+
+  const handleImageClick = () => {
+    setIsImageZoomed(!isImageZoomed);
+  };
+
+  const handleCloseZoom = () => {
+    setIsImageZoomed(false);
+  };
 
   return (
-    <section id="about" className="py-16 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            About Me
-          </h2>
-          <div className="w-20 h-1 bg-primary mx-auto mb-4"></div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Passionate CSE Student | MERN Stack Developer | Creative Problem Solver
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          {/* Profile Image Section */}
-          <div className="flex justify-center lg:justify-start">
-            <div className="relative">
-              <div className="w-80 h-80 rounded-2xl overflow-hidden shadow-lg border-4 border-white">
-                <img
-                  src="/about/college-photoo.jpg"
-                  alt="Pooja Patel - CSE Student"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'flex';
-                  }}
-                />
-                {/* Fallback if image doesn't load */}
-                <div className="hidden w-full h-full items-center justify-center flex-col bg-gray-100 text-gray-500">
-                  <div className="text-4xl mb-2">👩‍💻</div>
-                  <p className="font-medium">Profile Photo</p>
-                </div>
-              </div>
-              
-              {/* Experience Badge */}
-              <div className="absolute -bottom-4 -right-4 bg-primary text-white rounded-lg px-4 py-2 shadow-lg">
-                <div className="text-center">
-                  <div className="font-bold">A+ Grade</div>
-                  <div className="text-xs">Softpro Intern</div>
-                </div>
-              </div>
-            </div>
+    <>
+      <section id="about" className="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4 animate-fade-in">
+              About Me
+            </h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-primary to-blue-600 mx-auto mb-4 animate-slide-in"></div>
+            <p className="text-lg text-gray-600 animate-fade-in-delay">
+              Computer Science Student | MERN Stack Developer
+            </p>
           </div>
 
-          {/* Content Section */}
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Hello, I'm <span className="text-primary">{personalInfo.name}</span>
-              </h3>
-              
-              <div className="space-y-4 text-gray-600 leading-relaxed">
-                <p>
-                  I'm a passionate <strong>4th year Computer Science Engineering</strong> student at 
-                  Saraswati Higher Education College (AKTU University). My journey in technology 
-                  is driven by curiosity and a love for creating digital solutions.
-                </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Profile Image with Slideshow */}
+            <div className="flex justify-center">
+              <div className="relative group">
+                <div 
+                  className="w-96 h-96 rounded-2xl overflow-hidden shadow-2xl border-4 border-white transform transition-all duration-500 cursor-zoom-in"
+                  onClick={handleImageClick}
+                >
+                  <img
+                    src={images[currentImage]}
+                    alt={`Pooja Patel - Image ${currentImage + 1}`}
+                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                </div>
                 
-                <p>
-                  Recently, I completed a <strong>60-day MERN Stack internship at Softpro</strong> where 
-                  I received an <strong>A+ grade</strong> for my performance. This experience gave me 
-                  hands-on exposure to real-world web development projects.
-                </p>
-
-                <p>
-                  I believe in writing clean, efficient code and creating user-friendly applications 
-                  that solve real problems. My strength lies in quick learning and adapting to 
-                  new technologies.
-                </p>
+                {/* Image Indicator */}
+                <div className="absolute top-4 right-4 bg-black/70 text-white text-xs px-2 py-1 rounded-full">
+                  {currentImage + 1}/{images.length}
+                </div>
+                
+                {/* Experience Badge - Fixed Position */}
+                <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-primary to-blue-600 text-white rounded-lg px-4 py-2 shadow-lg">
+                  <div className="text-center">
+                    <div className="font-bold text-sm">A+ Grade</div>
+                    <div className="text-xs">Softpro</div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Quick Stats */}
-            <div className="grid grid-cols-3 gap-4">
-              <div className="bg-blue-50 rounded-lg p-4 text-center border border-blue-100">
-                <div className="text-xl font-bold text-primary">4th Year</div>
-                <div className="text-sm text-gray-600">CSE Student</div>
-              </div>
-              <div className="bg-green-50 rounded-lg p-4 text-center border border-green-100">
-                <div className="text-xl font-bold text-green-600">A+</div>
-                <div className="text-sm text-gray-600">Intern Grade</div>
-              </div>
-              <div className="bg-purple-50 rounded-lg p-4 text-center border border-purple-100">
-                <div className="text-xl font-bold text-purple-600">60 Days</div>
-                <div className="text-sm text-gray-600">Internship</div>
-              </div>
-            </div>
+            {/* Content */}
+            <div className="space-y-6">
+              <div className="animate-slide-in-right">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  Hello, I'm <span className="text-primary">{personalInfo.name}</span>
+                </h3>
+                
+                <div className="space-y-4 text-gray-600">
+                  <p className="transform hover:translate-x-2 transition-transform duration-300">
+                    I'm a 4th year Computer Science student at AKTU University with {currentCGPA} CGPA.
+                  </p>
+                  
+                  <p className="transform hover:translate-x-2 transition-transform duration-300">
+                    Completed MERN Stack internship at Softpro with A+ grade.
+                  </p>
 
-            {/* Key Strengths */}
-            <div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-3">My Strengths</h4>
-              <div className="flex flex-wrap gap-2">
-                <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
-                  Quick Learner
-                </span>
-                <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                  Problem Solver
-                </span>
-                <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">
-                  Good Communicator
-                </span>
-                <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
-                  Team Player
-                </span>
+                  <p className="transform hover:translate-x-2 transition-transform duration-300">
+                    Passionate about building web applications and learning new technologies.
+                  </p>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
 
-        {/* Personal Interests & Goals */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Personal Interests */}
-          <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-            <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-              <span className="text-primary mr-2">🎯</span>
-              What Drives Me
-            </h4>
-            <ul className="space-y-3 text-gray-600">
-              <li className="flex items-start">
-                <span className="text-primary mr-2 mt-1">•</span>
-                <span>Creating innovative web solutions that make a difference</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary mr-2 mt-1">•</span>
-                <span>Continuous learning and mastering new technologies</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary mr-2 mt-1">•</span>
-                <span>Building user-friendly and responsive applications</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary mr-2 mt-1">•</span>
-                <span>Collaborating with teams to solve complex problems</span>
-              </li>
-            </ul>
-          </div>
+              {/* Quick Stats */}
+              <div className="grid grid-cols-3 gap-4 animate-fade-in-up">
+                <div className="bg-white rounded-lg p-4 text-center border border-gray-200 shadow-sm transform hover:scale-105 transition-all duration-300">
+                  <div className="text-lg font-bold text-primary">4th Year</div>
+                  <div className="text-sm text-gray-600">CSE</div>
+                </div>
+                <div className="bg-white rounded-lg p-4 text-center border border-gray-200 shadow-sm transform hover:scale-105 transition-all duration-300">
+                  <div className="text-lg font-bold text-green-600">{currentCGPA}</div>
+                  <div className="text-sm text-gray-600">CGPA</div>
+                </div>
+                <div className="bg-white rounded-lg p-4 text-center border border-gray-200 shadow-sm transform hover:scale-105 transition-all duration-300">
+                  <div className="text-lg font-bold text-purple-600">A+</div>
+                  <div className="text-sm text-gray-600">Grade</div>
+                </div>
+              </div>
 
-          {/* Career Vision */}
-          <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-            <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-              <span className="text-primary mr-2">🚀</span>
-              My Vision
-            </h4>
-            <ul className="space-y-3 text-gray-600">
-              <li className="flex items-start">
-                <span className="text-primary mr-2 mt-1">•</span>
-                <span>Become an expert in full-stack web development</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary mr-2 mt-1">•</span>
-                <span>Work on challenging and meaningful projects</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary mr-2 mt-1">•</span>
-                <span>Contribute to open-source communities</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary mr-2 mt-1">•</span>
-                <span>Mentor and help other aspiring developers</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* College Life Section */}
-        <div className="mt-8 bg-gradient-to-r from-primary to-blue-600 rounded-lg p-6 text-white">
-          <div className="flex flex-col md:flex-row items-center gap-6">
-            <div className="flex-1">
-              <h4 className="text-xl font-bold mb-3">Beyond Academics</h4>
-              <p className="text-white/90 leading-relaxed">
-                When I'm not coding, you'll find me participating in college tech events, 
-                collaborating with peers on projects, or exploring new technologies. 
-                I believe in maintaining a balance between academic learning and practical 
-                application through hands-on projects and team collaborations.
-              </p>
-            </div>
-            <div className="w-24 h-24 rounded-lg overflow-hidden bg-white/20 flex items-center justify-center border-2 border-white/30">
-              <img
-                src="/about/college-activity.jpg"
-                alt="College Activities"
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.nextSibling.style.display = 'flex';
-                }}
-              />
-              <div className="hidden w-full h-full items-center justify-center">
-                <div className="text-center">
-                  <div className="text-xl">🌟</div>
-                  <div className="text-xs mt-1">Campus Life</div>
+              {/* Skills */}
+              <div className="animate-fade-in-up-delay">
+                <h4 className="text-lg font-semibold text-gray-900 mb-3">My Strengths</h4>
+                <div className="flex flex-wrap gap-2">
+                  {["Quick Learner", "Problem Solver", "Team Player"].map((skill, index) => (
+                    <span 
+                      key={skill}
+                      className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium transform hover:scale-105 transition-all duration-300"
+                      style={{ animationDelay: `${index * 100}ms` }}
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+
+        <style jsx>{`
+          @keyframes fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          @keyframes slide-in {
+            from { width: 0; }
+            to { width: 5rem; }
+          }
+          @keyframes slide-in-right {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+          }
+          @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .animate-fade-in { animation: fade-in 1s ease-out; }
+          .animate-fade-in-delay { animation: fade-in 1s ease-out 0.3s both; }
+          .animate-slide-in { animation: slide-in 1s ease-out; }
+          .animate-slide-in-right { animation: slide-in-right 1s ease-out; }
+          .animate-fade-in-up { animation: fade-in-up 1s ease-out 0.5s both; }
+          .animate-fade-in-up-delay { animation: fade-in-up 1s ease-out 0.7s both; }
+        `}</style>
+      </section>
+
+      {/* Zoom Modal */}
+      {isImageZoomed && (
+        <div 
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
+          onClick={handleCloseZoom}
+        >
+          <div className="relative max-w-4xl max-h-full">
+            <img
+              src={images[currentImage]}
+              alt="Pooja Patel - Zoomed"
+              className="w-full h-full object-contain rounded-lg shadow-2xl transform scale-100 transition-transform duration-500"
+            />
+            <button
+              onClick={handleCloseZoom}
+              className="absolute -top-4 -right-4 bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors duration-300"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

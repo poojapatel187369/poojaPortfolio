@@ -8,7 +8,10 @@ import contactRoutes from './routes/contact.js';
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -21,7 +24,8 @@ app.get('/api/health', (req, res) => {
     status: 'OK',
     message: '✅ Backend with Email & MongoDB is running!',
     database: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected',
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    email: process.env.EMAIL_USER ? 'Configured' : 'Not configured'
   });
 });
 
@@ -52,8 +56,12 @@ mongoose.connection.on('disconnected', () => {
 // Server listen
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
+  console.log('='.repeat(50));
   console.log('🚀 Server started successfully!');
+  console.log('='.repeat(50));
   console.log(`📍 Port: ${PORT}`);
-  console.log('📧 Nodemailer configured!');
-  console.log('🗄️ MongoDB connecting...');
+  console.log(`📧 Email: ${process.env.EMAIL_USER}`);
+  console.log(`🌐 Frontend: ${process.env.CLIENT_URL}`);
+  console.log(`🗄️ MongoDB: ${process.env.MONGODB_URI ? 'Configured' : 'Not configured'}`);
+  console.log('='.repeat(50));
 });

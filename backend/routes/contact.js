@@ -1,10 +1,10 @@
 import express from 'express';
 import nodemailer from 'nodemailer';
-import Contact from '../models/contact.js';
+import Contact from '../models/Contact.js';
 
 const router = express.Router();
 
-// Nodemailer configuration with better error handling
+// Nodemailer configuration
 const createTransporter = () => {
   return nodemailer.createTransport({
     service: 'gmail',

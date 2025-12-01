@@ -47,8 +47,9 @@ export const portfolioData = {
       degree: "Computer Science Engineering (2022-2026)",
       institution: "Saraswati Higher Education and Technical College - AKTU University",
       year: "2022-2026", 
-      score: "Pursuing",
-      details: "Currently in 4th year of B.Tech CSE program. Specializing in Web Development and AI technologies.",
+      score: "CGPA: 8.7/10 (Current)",
+      cgpa: "8.7",
+      details: "Currently in 4th year of B.Tech CSE program with current CGPA of 8.7.",
       photo: "/education/college-id.jpg"
     },
     {
@@ -89,44 +90,48 @@ export const portfolioData = {
   }
 ],
 
-  projects: [
-    {
-      title: "AI LinkedIn Assistant",
-      description: " Developed a social networking platform with user profiles, posts, likes, comments, and notifications.Implemented interactive Assistant feature for enhanced user experience.",
-      techStack: ["React", "Node.js", "Express.js", "MongoDB", "REST API","Context API"],
-      image: "/projects/linkedin.png",
-      githubLink: "https://github.com/poojapatel187369/linkedIn",
-      liveDemo: "https://linkedin-frontendd-3tlh.onrender.com",
-      featured: true
-    },
-    {
-      title: "Chatly – Real-Time Chat Application",
-      description: "Built real-time messaging app with typing indicators, online/offline status, and image sharing. Secured using JWT authentication and Redux for state management.",
-      techStack: ["React.js", "Node.js", "Socket.IO", "JWT", "Redux", "MongoDB"],
-      image: "/projects/chatly.webp",
-      githubLink: "https://github.com/poojapatel187369/chatly", 
-      liveDemo: "https://chatly-frontend-uv5z.onrender.com",
-      featured: true
-    },
-    {
-      title: "Virtual Assistant Web App",
-      description: "Created AI-powered virtual assistant handling voice/text commands, reminders, and API integrations. Integrated Weather API, Wikipedia search, and text-to-speech for smart responses.",
-      techStack: ["React.js", "Node.js", "Express.js", "MongoDB", "AI Integration"],
-      image: "/projects/ai.jpg",
-      githubLink: "https://github.com/poojapatel187369/virtualAssistant",
-      liveDemo: "https://virtualassistant-frontend-iq1m.onrender.com",
-      featured: false
-    }
-  ],
+projects: [
+  {
+    title: "AI LinkedIn Assistant",
+    description: "Developed a social networking platform with user profiles, posts, likes, comments, and notifications. Implemented interactive Assistant feature for enhanced user experience.",
+    techStack: ["React", "Node.js", "Express.js", "MongoDB", "REST API", "Context API"],
+    image: "/projects/linkedin.png",
+    githubLink: "https://github.com/poojapatel187369/linkedIn",
+    liveDemo: "https://linkedin-frontendd-3tlh.onrender.com",
+    videoDemo: "https://www.youtube.com/embed/h6xOIISuVGE", // ✅ Fixed
+  },
+  {
+    title: "Chatly – Real-Time Chat App", 
+    description: "Built real-time messaging app with typing indicators, online/offline status, and image sharing. Secured using JWT authentication and Redux for state management.",
+    techStack: ["React.js", "Node.js", "Socket.IO", "JWT", "Redux", "MongoDB"],
+    image: "/projects/chatly.webp",
+    githubLink: "https://github.com/poojapatel187369/chatly",
+    liveDemo: "https://chatly-frontend-uv5z.onrender.com", 
+    videoDemo: "https://www.youtube.com/embed/bU65XgDmw5I", // ✅ Fixed
+  },
+  {
+    title: "Virtual Assistant Web App",
+    description: "Created AI-powered virtual assistant handling voice/text commands, reminders, and API integrations. Integrated Weather API, Wikipedia search, and text-to-speech for smart responses.",
+    techStack: ["React.js", "Node.js", "Express.js", "MongoDB", "AI Integration"],
+    image: "/projects/ai.jpg", 
+    githubLink: "https://github.com/poojapatel187369/virtualAssistant",
+    liveDemo: "https://virtualassistant-frontend-iq1m.onrender.com",
+    videoDemo: "https://www.youtube.com/embed/uzxBWgDTpcg", // ✅ Fixed
+  }
+],
 
- // In your portfolioData.js file
-// portfolioData.js
 achievements: [
   {
     title: "B.Tech Topper - CSE Department",
-    image: "/achievements/btech-topper.jpg",
+    image: "/achievements/btech-topper.jpeg",
     description: "Secured top position in Computer Science Engineering department",
     type: "image"
+  },
+  {
+    title: "Campus Placement at QSpiders",
+    image: "/achievements/qspider.jpeg", 
+    description: "Secured placement at QSpiders, India's leading software testing organization, recognized for dedication and technical excellence during campus recruitment.",
+    type: "placement"
   },
   {
     title: "Academic Excellence Award", 
@@ -170,18 +175,21 @@ certificates: [
     description: "Completed C programming certification through IIT Bombay's training program with remote examination",
     type: "pdf",
     pdfUrl: "/certificates/c-programming.pdf"
+  },
+  {
+    title: "Introduction to Computers Training", 
+    organization: "IIT Bombay Spoken Tutorial",
+    duration: "Training Program",
+    date: "2023",
+    grade: "95% Score",
+    description: "Completed Introduction to Computers certification through IIT Bombay's training program with remote examination",
+    type: "pdf",
+    pdfUrl: "/certificates/intro-computers.pdf"
   }
-]
-,
+],
   socialLinks: {
     github: "https://github.com/poojapatel187369",
     linkedin: "https://www.linkedin.com/in/pooja-patel-154a842b0/", 
     email: "mailto:poojapatel187369@gmail.com"
-  },
-  personalInfo: {
-    name: "Pooja Patel",
-    email: "poojapatel187369@gmail.com",
-    phone: "+91 6307744919",
-    location: "Varanasi, India"
   }
 };
