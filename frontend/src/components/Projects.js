@@ -56,13 +56,13 @@ const Projects = () => {
   return (
     <section id="projects" className="py-20 bg-gradient-to-br from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4 animate-fade-in">My Projects</h2>
-          <div className="w-24 h-1.5 bg-gradient-to-r from-primary to-blue-600 mx-auto mb-4 animate-slide-in"></div>
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto animate-fade-in-delay whitespace-nowrap">
-            Hover to watch demo videos • Click to explore live projects • Code available on GitHub
-          </p>
-        </div>
+      <div className="text-center mb-8 md:mb-12">
+  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 animate-fade-in">My Projects</h2>
+  <div className="w-20 md:w-24 h-1.5 bg-gradient-to-r from-primary to-blue-600 mx-auto mb-4 animate-slide-in"></div>
+  <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto animate-fade-in-delay px-4">
+    Hover for videos • Click for demo • Code on GitHub
+  </p>
+</div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
